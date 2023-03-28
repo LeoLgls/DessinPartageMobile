@@ -6,9 +6,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 public class Dessin extends AppCompatActivity {
 
@@ -40,7 +44,7 @@ public class Dessin extends AppCompatActivity {
     }
 
 
-    class ZoneDessin extends View
+    class ZoneDessin extends View implements View.OnClickListener, View.OnTouchListener
     {
         Paint paint = new Paint();
 
@@ -56,7 +60,19 @@ public class Dessin extends AppCompatActivity {
 
         public void onDraw(Canvas canvas)
         {
+
             canvas.drawCircle(50, 50, 30, paint);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+
+            return false;
         }
     }
 
