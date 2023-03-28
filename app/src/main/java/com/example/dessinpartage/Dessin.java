@@ -25,6 +25,7 @@ public class Dessin extends AppCompatActivity {
     ZoneDessin whatIdraw;
     int color = Color.BLACK;
     boolean plein = false;
+    boolean isDrawing = false;
 
     String selectedShape = "";
 
@@ -122,26 +123,31 @@ public class Dessin extends AppCompatActivity {
 
             Paint p = new Paint();
             p.setColor(color);
+            p.setAntiAlias(true);
+            p.setStrokeWidth(10);
             if(plein) p.setStyle(Paint.Style.FILL_AND_STROKE);
+            else p.setStyle(Paint.Style.STROKE);
 
-            switch (selectedShape){
-                case "line" :
-                    canvas.drawLine(x, y, x2, y2, p );
-                    break;
+            if(isDrawing){
+                switch (selectedShape){
+                    case "line" :
+                        canvas.drawLine(x, y, x2, y2, p );
+                        break;
 
-                case "rectangle" :
-                    float xhaut = Math.min(x,x2);
-                    float yhaut = Math.min(y,y2);
-                    float xbas  = Math.max(x,x2);
-                    float ybas  = Math.max(y,y2);
+                    case "rectangle" :
+                        float xhaut = Math.min(x,x2);
+                        float yhaut = Math.min(y,y2);
+                        float xbas  = Math.max(x,x2);
+                        float ybas  = Math.max(y,y2);
 
-                    canvas.drawRect(x,y,x2,y2,p);
-                    break;
+                        canvas.drawRect(x,y,x2,y2,p);
+                        break;
 
-                case "circle" :
-                    float radius = Math.max(Math.abs(x - x2),Math.abs(y - y2));
-                    canvas.drawCircle(x,y, radius, p);
-                    break;
+                    case "circle" :
+                        float radius = Math.max(Math.abs(x - x2),Math.abs(y - y2));
+                        canvas.drawCircle(x,y, radius, p);
+                        break;
+                }
             }
         }
 
@@ -149,19 +155,11 @@ public class Dessin extends AppCompatActivity {
         @Override
         public boolean onTouch(View view, MotionEvent event)
         {
-            if (event.getAction() == MotionEvent.ACTION_MOVE)
-            {
-                x = event.getX();
-                y = event.getY();
-                radius = 100;
-                this.invalidate();
-
-            }
-
             switch (event.getAction()){
                 case MotionEvent.ACTION_DOWN:
                     this.x = event.getX();
                     this.y = event.getY();
+                    isDrawing = true;
                     break;
 
                 case MotionEvent.ACTION_MOVE:
@@ -194,8 +192,9 @@ public class Dessin extends AppCompatActivity {
                             alShapes.add(new Circle(x, y, radius, color, plein));
                             break;
                     }
-
+                    isDrawing = false;
                     this.invalidate();
+
                     break;
             }
 

@@ -12,6 +12,7 @@ public abstract class Shape {
         this.y = y;
         this.paint = new Paint();
         this.paint.setColor(col);
+        this.paint.setStrokeWidth(10);
         this.paint.setAntiAlias(true);
     }
 

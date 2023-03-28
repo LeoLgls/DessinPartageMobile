@@ -12,6 +12,7 @@ public class Rectangle extends Shape{
         this.x2 = x2;
         this.y2 = y2;
         if(plein) this.paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        else this.paint.setStyle(Paint.Style.STROKE);
     }
 
     @Override

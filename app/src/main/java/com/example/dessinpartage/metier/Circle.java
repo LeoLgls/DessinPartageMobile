@@ -11,6 +11,7 @@ public class Circle extends Shape {
         super(x, y, col);
         this.radius = radius;
         if(plein) this.paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        else this.paint.setStyle(Paint.Style.STROKE);
     }
 
     @Override
