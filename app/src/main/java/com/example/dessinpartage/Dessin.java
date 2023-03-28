@@ -149,6 +149,7 @@ public class Dessin extends AppCompatActivity {
                         break;
                 }
             }
+            this.invalidate();
         }
 
 
