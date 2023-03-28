@@ -23,6 +23,7 @@
         />
 
     <Button
+        android:id="@+id/newDraw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -36,14 +37,14 @@
         />
 
     <Button
+        android:id="@+id/resumeDraw"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="#4f24ed"
         android:text="@string/reprendre_dessin"
-        android:textColor="@color/white" />
-    <!--android:onClick=""-->
+        android:textColor="@color/white"
+        android:onClick="ouvrirDessin"/>
 
     <TextView android:layout_width="match_parent" android:layout_height="match_parent"
         android:layout_weight="1" android:background="#000000" android:textSize="6dp" android:text=""

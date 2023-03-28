@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         //on va à l'activité dessin
         Intent intentDessin = new Intent(this, Dessin.class);
 
+        intentDessin.putExtra("new",view.getId()==R.id.newDraw);
         startActivity(intentDessin);
 
     }

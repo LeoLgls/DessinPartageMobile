@@ -2,6 +2,8 @@ package com.example.dessinpartage.metier;
 
 import android.graphics.Canvas;
 
+import androidx.annotation.NonNull;
+
 public class Line extends Shape{
 
     private float x2, y2;
@@ -15,5 +17,11 @@ public class Line extends Shape{
     @Override
     public void draw(Canvas c) {
         c.drawLine(x, y, x2, y2, paint);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "l:"+x+":"+y+":"+x2+":"+y2+":"+col;
     }
 }
