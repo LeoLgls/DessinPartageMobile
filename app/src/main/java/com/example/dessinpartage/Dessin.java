@@ -38,12 +38,6 @@ public class Dessin extends AppCompatActivity {
     }
 
 
-    public void onClick(View view)
-    {
-        setColor(view);
-        whatIdraw.invalidate();
-    }
-
     public void setColor (View view)
     {
         switch (view.getId())
