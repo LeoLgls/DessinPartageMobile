@@ -97,52 +97,64 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/carre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/carre" />
+            app:srcCompat="@drawable/carre"
+            android:onClick="selectForme"
+            />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/carreplein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/carre_plein" />
+            app:srcCompat="@drawable/carre_plein"
+            android:onClick="selectForme"
+            />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/cercle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/cercle" />
+            app:srcCompat="@drawable/cercle"
+            android:onClick="selectForme"
+            />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/cercleplein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/cercle_plein" />
+            app:srcCompat="@drawable/cercle_plein"
+            android:onClick="selectForme"
+            />
 
         <ImageButton
-            android:id="@+id/imageButton13"
+            android:id="@+id/ligne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/ligne" />
+            app:srcCompat="@drawable/ligne"
+            android:onClick="selectForme"
+            />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/retour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/retour" />
+            app:srcCompat="@drawable/retour"
+            android:onClick="selectForme"
+            />
 
 
     </LinearLayout>

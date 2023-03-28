@@ -13,7 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class Dessin extends AppCompatActivity {
+public class Dessin extends AppCompatActivity
+{
 
     ZoneDessin whatIdraw;
     Paint paint = new Paint();
@@ -37,6 +38,25 @@ public class Dessin extends AppCompatActivity {
         finish();
     }
 
+
+    public String selectForme (View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.cercle:
+                return "cercle";
+            case R.id.cercleplein:
+                return "cercle-plein";
+            case R.id.carre:
+                return "carre";
+            case R.id.carreplein:
+                return "carre-plein";
+            case R.id.ligne:
+                return "ligne";
+        }
+
+        return "";
+    }
 
     public void setColor (View view)
     {
