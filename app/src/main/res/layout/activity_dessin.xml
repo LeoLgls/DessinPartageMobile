@@ -96,14 +96,15 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <ImageButton
+            android:id="@+id/pinceau"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:backgroundTint="@color/white"
             app:srcCompat="@drawable/pinceau"
-            android:onClick="selectForme"/>
+            android:onClick="selectForme"
+            />
 
         <ImageButton
             android:id="@+id/carre"
@@ -162,6 +163,8 @@
             app:srcCompat="@drawable/retour"
             android:onClick="selectForme"
             />
+
+
 
 
     </LinearLayout>
