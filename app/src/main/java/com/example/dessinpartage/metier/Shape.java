@@ -1,4 +1,4 @@
-package metier;
+package com.example.dessinpartage.metier;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
