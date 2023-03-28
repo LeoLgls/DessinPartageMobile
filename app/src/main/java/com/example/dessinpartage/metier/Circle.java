@@ -5,9 +5,9 @@ import android.graphics.Paint;
 
 public class Circle extends Shape {
 
-    private int radius;
+    private float radius;
 
-    public Circle(int x, int y, int radius, int col, boolean plein) {
+    public Circle(float x, float y, float radius, int col, boolean plein) {
         super(x, y, col);
         this.radius = radius;
         if(plein) this.paint.setStyle(Paint.Style.FILL_AND_STROKE);

@@ -13,11 +13,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class Dessin extends AppCompatActivity
-{
+import com.example.dessinpartage.metier.Circle;
+import com.example.dessinpartage.metier.Line;
+import com.example.dessinpartage.metier.Rectangle;
+import com.example.dessinpartage.metier.Shape;
+
+import java.util.ArrayList;
+
+public class Dessin extends AppCompatActivity {
 
     ZoneDessin whatIdraw;
-    Paint paint = new Paint();
+    int color = Color.BLACK;
+    boolean plein = false;
+
+    String selectedShape = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,23 +48,31 @@ public class Dessin extends AppCompatActivity
     }
 
 
-    public String selectForme (View view)
+    public void selectForme(View view)
     {
         switch (view.getId())
         {
             case R.id.cercle:
-                return "cercle";
+                this.selectedShape = "circle";
+                this.plein = false;
+                break;
             case R.id.cercleplein:
-                return "cercle-plein";
+                this.selectedShape =  "circle";
+                this.plein = true;
+                break;
             case R.id.carre:
-                return "carre";
+                this.selectedShape =  "rectangle";
+                this.plein = false;
+                break;
             case R.id.carreplein:
-                return "carre-plein";
+                this.selectedShape =  "rectangle";
+                this.plein = true;
+                break;
             case R.id.ligne:
-                return "ligne";
+                this.selectedShape =  "line";
+                break;
         }
 
-        return "";
     }
 
     public void setColor (View view)
@@ -63,19 +80,19 @@ public class Dessin extends AppCompatActivity
         switch (view.getId())
         {
             case R.id.rouge:
-                paint.setColor(Color.RED);
+                color = Color.RED;
                 break;
             case R.id.vert:
-                paint.setColor(Color.GREEN);
+                color = Color.GREEN;
                 break;
             case R.id.bleu:
-                paint.setColor(Color.BLUE);
+                color = Color.BLUE;
                 break;
             case R.id.jaune:
-                paint.setColor(Color.YELLOW);
+                color = Color.YELLOW;
                 break;
             case R.id.noir:
-                paint.setColor(Color.BLACK);
+                color = Color.BLACK;
                 break;
 
         }
@@ -83,21 +100,49 @@ public class Dessin extends AppCompatActivity
     class ZoneDessin extends View implements View.OnTouchListener
     {
 
-        float x,y,radius;
+        ArrayList<Shape> alShapes;
+        float x,y,x2,y2,radius;
 
         public ZoneDessin(Context context)
         {
             super(context);
+
+            this.alShapes = new ArrayList<Shape>();
+
             setFocusable(true);
 
-            paint.setStyle(Paint.Style.FILL_AND_STROKE);
-
-            this.setOnTouchListener(this);
+            setOnTouchListener(this);
         }
 
         public void onDraw(Canvas canvas)
         {
-            canvas.drawCircle(x, y, radius, paint);
+            for(Shape s : alShapes){
+                s.draw(canvas);
+            }
+
+            Paint p = new Paint();
+            p.setColor(color);
+            if(plein) p.setStyle(Paint.Style.FILL_AND_STROKE);
+
+            switch (selectedShape){
+                case "line" :
+                    canvas.drawLine(x, y, x2, y2, p );
+                    break;
+
+                case "rectangle" :
+                    float xhaut = Math.min(x,x2);
+                    float yhaut = Math.min(y,y2);
+                    float xbas  = Math.max(x,x2);
+                    float ybas  = Math.max(y,y2);
+
+                    canvas.drawRect(x,y,x2,y2,p);
+                    break;
+
+                case "circle" :
+                    float radius = Math.max(Math.abs(x - x2),Math.abs(y - y2));
+                    canvas.drawCircle(x,y, radius, p);
+                    break;
+            }
         }
 
 
@@ -110,6 +155,48 @@ public class Dessin extends AppCompatActivity
                 y = event.getY();
                 radius = 100;
                 this.invalidate();
+
+            }
+
+            switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    this.x = event.getX();
+                    this.y = event.getY();
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    this.x2 = event.getX();
+                    this.y2 = event.getY();
+                    this.invalidate();
+                    break;
+
+                case MotionEvent.ACTION_UP:
+                    this.x2 = event.getX();
+                    this.y2 = event.getY();
+
+                    switch (selectedShape){
+                        case "line" :
+                            alShapes.add(new Line(x, y, x2, y2, color));
+                            break;
+
+                        case "rectangle" :
+                            float xhaut = Math.min(x,x2);
+                            float yhaut = Math.min(y,y2);
+                            float xbas  = Math.max(x,x2);
+                            float ybas  = Math.max(y,y2);
+
+                            alShapes.add(new Rectangle(xhaut, yhaut, xbas, ybas, color, plein));
+                            break;
+
+                        case "circle" :
+                            float radius = Math.max(Math.abs(x - x2),Math.abs(y - y2));
+
+                            alShapes.add(new Circle(x, y, radius, color, plein));
+                            break;
+                    }
+
+                    this.invalidate();
+                    break;
             }
 
             return true;

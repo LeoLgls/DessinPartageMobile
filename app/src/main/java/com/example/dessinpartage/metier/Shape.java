@@ -5,9 +5,9 @@ import android.graphics.Paint;
 
 public abstract class Shape {
     protected Paint paint;
-    protected int x, y;
+    protected float x, y;
 
-    public Shape(int x, int y, int col) {
+    public Shape(float x, float y, int col) {
         this.x = x;
         this.y = y;
         this.paint = new Paint();
