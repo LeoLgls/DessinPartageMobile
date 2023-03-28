@@ -6,17 +6,17 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
+import android.hardware.GeomagneticField;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
 
 public class Dessin extends AppCompatActivity {
 
     ZoneDessin whatIdraw;
+    Paint paint = new Paint();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,48 +32,81 @@ public class Dessin extends AppCompatActivity {
 
     }
 
-    //fait moi un fonction pour quitter lorque le bouton exit est cliqué
     public void exit(View view)
     {
         finish();
     }
 
-    public void setColor (View view)
-    {
 
+    public void onClick(View view)
+    {
+        setColor(view);
+        whatIdraw.invalidate();
     }
 
-
-    class ZoneDessin extends View implements View.OnClickListener, View.OnTouchListener
+    public void setColor (View view)
     {
-        Paint paint = new Paint();
+        switch (view.getId())
+        {
+            case R.id.rouge:
+                paint.setColor(Color.RED);
+                break;
+            case R.id.vert:
+                paint.setColor(Color.GREEN);
+                break;
+            case R.id.bleu:
+                paint.setColor(Color.BLUE);
+                break;
+            case R.id.jaune:
+                paint.setColor(Color.YELLOW);
+                break;
+            case R.id.noir:
+                paint.setColor(Color.BLACK);
+                break;
+
+        }
+    }
+    class ZoneDessin extends View implements View.OnTouchListener
+    {
+
+        float x,y,radius;
 
         public ZoneDessin(Context context)
         {
             super(context);
             setFocusable(true);
 
-            paint.setColor(Color.RED);
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(5);
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+
+            this.setOnTouchListener(this);
         }
 
         public void onDraw(Canvas canvas)
         {
-
-            canvas.drawCircle(50, 50, 30, paint);
+            canvas.drawCircle(x, y, radius, paint);
         }
+
 
         @Override
-        public void onClick(View view) {
+        public boolean onTouch(View view, MotionEvent event)
+        {
+            if (event.getAction() == MotionEvent.ACTION_MOVE)
+            {
+                x = event.getX();
+                y = event.getY();
+                radius = 100;
+                this.invalidate();
+            }
 
+            return true;
         }
 
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
 
-            return false;
-        }
+
+
+
+
+
     }
 
 }
