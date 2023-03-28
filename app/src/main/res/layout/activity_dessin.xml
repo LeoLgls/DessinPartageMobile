@@ -43,35 +43,49 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/rouge"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="@color/red"
+            android:onClick="setColor"
             />
 
         <Button
+            android:id="@+id/vert"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/green"/>
+            android:backgroundTint="@color/green"
+            android:onClick="setColor"
+            />
 
         <Button
+            android:id="@+id/bleu"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/blue" />
+            android:backgroundTint="@color/blue"
+            android:onClick="setColor"
+            />
 
         <Button
+            android:id="@+id/jaune"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/yellow"/>
+            android:backgroundTint="@color/yellow"
+            android:onClick="setColor"
+            />
 
         <Button
+            android:id="@+id/noir"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/black"/>
+            android:backgroundTint="@color/black"
+            android:onClick="setColor"
+            />
 
     </LinearLayout>
 

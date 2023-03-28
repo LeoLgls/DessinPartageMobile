@@ -3,7 +3,6 @@ package com.example.dessinpartage;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,10 +19,11 @@ public class Dessin extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         whatIdraw = new ZoneDessin(this);
-        //
+        //on va chercher le layout activity_dessin
         setContentView(R.layout.activity_dessin);
-
+        //on va chercher le layout principal
         LinearLayout layoutPrincipal = (LinearLayout) findViewById(R.id.layoutPrincipal);
+        //on ajoute le dessin au layout principal
         layoutPrincipal.addView(whatIdraw);
 
     }
@@ -33,6 +33,12 @@ public class Dessin extends AppCompatActivity {
     {
         finish();
     }
+
+    public void setColor (View view)
+    {
+
+    }
+
 
     class ZoneDessin extends View
     {
