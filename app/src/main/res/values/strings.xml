@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DessinPartage</string>
+    <string name="app_name">MobileDrawing</string>
     <string name="nouveau_dessin">Nouveau Dessin</string>
     <string name="titre">Application de Dessin</string>
     <string name="reprendre_dessin">Reprendre Dessin</string>
