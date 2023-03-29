@@ -39,7 +39,7 @@ public class Dessin extends AppCompatActivity {
         //on va chercher le layout principal
         LinearLayout layoutPrincipal = (LinearLayout) findViewById(R.id.layoutPrincipal);
         //on ajoute le dessin au layout principal
-        if(this.isNew) this.isNew = getIntent().getBooleanExtra("new",true);
+        this.isNew = getIntent().getBooleanExtra("new",true);
         whatIdraw = new ZoneDessin(this);
         layoutPrincipal.addView(whatIdraw);
     }
@@ -47,13 +47,12 @@ public class Dessin extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean("turn", this.isNew);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        this.isNew = savedInstanceState.getBoolean("turn", true);
         super.onRestoreInstanceState(savedInstanceState);
+        whatIdraw.repaireAlShapes();
     }
 
     @Override
@@ -138,57 +137,62 @@ public class Dessin extends AppCompatActivity {
             this.alShapes = new LinkedList<Shape>();
 
             if(!isNew){
-                String list = getSharedPreferences("SAVE",MODE_PRIVATE).getString("KEY",null);
-                if(list != null){
-                    //suppresion des crochets
-                    list = list.substring(1,list.length()-1);
-                    System.out.println(list);
-                    //separation des differentes formes
-                    String lstShapes[] = list.split(", ");
-
-                    for(int i=0; i<lstShapes.length; i++){
-                        //isoler les valeur des formes
-                        String lstValues[] = lstShapes[i].split(":");
-
-                        switch (lstValues[0]){
-                            case "c":
-                                this.alShapes.add(new Circle(
-                                        Float.parseFloat(lstValues[1]),
-                                        Float.parseFloat(lstValues[2]),
-                                        Float.parseFloat(lstValues[3]),
-                                        Integer.parseInt(lstValues[4]),
-                                        Boolean.parseBoolean(lstValues[5])
-                                ));
-                                break;
-
-                            case "r":
-                                this.alShapes.add(new Rectangle(
-                                        Float.parseFloat(lstValues[1]),
-                                        Float.parseFloat(lstValues[2]),
-                                        Float.parseFloat(lstValues[3]),
-                                        Float.parseFloat(lstValues[4]),
-                                        Integer.parseInt(lstValues[5]),
-                                        Boolean.parseBoolean(lstValues[6])
-                                ));
-                                break;
-
-                            case "l":
-                                this.alShapes.add(new Line(
-                                        Float.parseFloat(lstValues[1]),
-                                        Float.parseFloat(lstValues[2]),
-                                        Float.parseFloat(lstValues[3]),
-                                        Float.parseFloat(lstValues[4]),
-                                        Integer.parseInt(lstValues[5])
-                                ));
-                                break;
-                        }
-                    }
-                }
+                this.repaireAlShapes();
             }
 
             setFocusable(true);
 
             setOnTouchListener(this);
+        }
+
+        public void repaireAlShapes(){
+
+            String list = getSharedPreferences("SAVE",MODE_PRIVATE).getString("KEY",null);
+            if(list != null){
+                //suppresion des crochets
+                list = list.substring(1,list.length()-1);
+                System.out.println(list);
+                //separation des differentes formes
+                String lstShapes[] = list.split(", ");
+
+                for(int i=0; i<lstShapes.length; i++){
+                    //isoler les valeur des formes
+                    String lstValues[] = lstShapes[i].split(":");
+
+                    switch (lstValues[0]){
+                        case "c":
+                            this.alShapes.add(new Circle(
+                                    Float.parseFloat(lstValues[1]),
+                                    Float.parseFloat(lstValues[2]),
+                                    Float.parseFloat(lstValues[3]),
+                                    Integer.parseInt(lstValues[4]),
+                                    Boolean.parseBoolean(lstValues[5])
+                            ));
+                            break;
+
+                        case "r":
+                            this.alShapes.add(new Rectangle(
+                                    Float.parseFloat(lstValues[1]),
+                                    Float.parseFloat(lstValues[2]),
+                                    Float.parseFloat(lstValues[3]),
+                                    Float.parseFloat(lstValues[4]),
+                                    Integer.parseInt(lstValues[5]),
+                                    Boolean.parseBoolean(lstValues[6])
+                            ));
+                            break;
+
+                        case "l":
+                            this.alShapes.add(new Line(
+                                    Float.parseFloat(lstValues[1]),
+                                    Float.parseFloat(lstValues[2]),
+                                    Float.parseFloat(lstValues[3]),
+                                    Float.parseFloat(lstValues[4]),
+                                    Integer.parseInt(lstValues[5])
+                            ));
+                            break;
+                    }
+                }
+            }
         }
 
         public void undo(){
